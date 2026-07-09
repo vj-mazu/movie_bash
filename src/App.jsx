@@ -638,7 +638,7 @@ export default function App() {
               <div className="flex items-center justify-center sm:justify-between gap-4 sm:gap-6 md:gap-8 flex-wrap-none">
                 {[
                   { name: "Netflix", img: "/logos/netflix.svg", heightClass: "h-7 sm:h-11 md:h-12" },
-                  { name: "Prime Video", img: "/logos/prime.svg", heightClass: "h-6 sm:h-10 md:h-11" },
+                  { name: "Prime Video", img: "/logos/prime.svg", heightClass: "h-9 sm:h-14 md:h-16" },
                   { name: "Disney+ Hotstar", img: "/logos/hotstar.svg", heightClass: "h-8 sm:h-12 md:h-14" },
                   { name: "YouTube", img: "/logos/youtube.svg", heightClass: "h-6 sm:h-10 md:h-11" },
                   { name: "PlayStation 5", img: "/logos/playstation.svg", heightClass: "h-5 sm:h-9 md:h-10" }
@@ -932,7 +932,7 @@ export default function App() {
       </section>
 
       {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
-      <section ref={galleryRef} id="gallery" className="relative h-[240vh] sm:h-[260vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
+      <section ref={galleryRef} id="gallery" className="relative h-[240vh] sm:h-[260vh] md:h-[300vh] bg-purple-mesh border-t border-black/5">
         <div className="sticky top-[12vh] md:top-0 h-[76vh] md:h-screen flex items-center overflow-hidden">
           <div 
             style={{ transform: `translateX(${-scrollProgress * 82}%)` }} 
@@ -1329,7 +1329,7 @@ export default function App() {
       </section>
 
       {/* 10. Reviews Section (3D Coverflow Stage) */}
-      <section id="reviews" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-brand-bg border-t border-black/5 overflow-hidden">
+      <section id="reviews" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-purple-mesh border-t border-black/5 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           
           <div className="mb-12 text-center">

@@ -44,6 +44,9 @@ const Icons = {
   ),
   Utensils: ({ size = 24 }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v8c0 1.1.9 2 2 2h3Z"></path><path d="M18 22v-7"></path></svg>
+  ),
+  Calendar: ({ size = 16, className = "" }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
   )
 };
 
@@ -168,10 +171,13 @@ const REVIEWS = [
 ];
 
 const GALLERY = [
-  { id: 1, title: 'Private Screening Setup', image: 'https://moviebash.in/assets/uploads/screens/21b1b9ae-5394-429b-872a-152c337bb0c9.JPG' },
-  { id: 2, title: 'Surprise Birthday Decoration', image: 'https://moviebash.in/assets/uploads/screens/2560473c-65e1-439c-a609-93ba8001195f.JPG' },
-  { id: 3, title: 'Intimate Proposal Path', image: 'https://moviebash.in/assets/uploads/addons/candle-entry.jpg' },
-  { id: 4, title: 'Premium Recliners & Screen', image: 'https://moviebash.in/assets/uploads/screens/1467482a-58a8-4d4d-b2d7-260c9e811aff.JPG' }
+  { id: 1, title: 'VIP Red Carpet Entry', image: '/gallery-5.jpg' },
+  { id: 2, title: 'Royal Birthday Celebration', image: '/gallery-1.jpg' },
+  { id: 3, title: 'Movie Lounge', image: '/gallery-2.jpg' },
+  { id: 4, title: 'Intimate Proposal Path', image: 'https://moviebash.in/assets/uploads/addons/candle-entry.jpg' },
+  { id: 5, title: 'Gilded Birthday Decor', image: '/gallery-4.jpg' },
+  { id: 6, title: 'Grand Floral Love Bench', image: '/gallery-3.jpg' },
+  { id: 7, title: 'Bespoke Recliner Comfort', image: '/gallery-6.jpg' }
 ];
 
 const FAQS = [
@@ -200,6 +206,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const toggleFaq = (idx) => {
     setActiveFaq(prev => prev === idx ? null : idx);
@@ -224,6 +231,17 @@ export default function App() {
   
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [bookingFinished, setBookingFinished] = useState(false);
+
+  useEffect(() => {
+    if (isBookingModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isBookingModalOpen]);
 
   useEffect(() => {
     setLoaderQuote(LOADER_QUOTES[Math.floor(Math.random() * LOADER_QUOTES.length)]);
@@ -283,10 +301,7 @@ export default function App() {
   const handleStartBooking = (screen) => {
     setSelectedScreen(screen);
     setBookingStep(1);
-    const element = document.getElementById('booking');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    setIsBookingModalOpen(true);
   };
 
   const handleFormSubmit = (e) => {
@@ -395,7 +410,7 @@ export default function App() {
 
           {/* Right Action Trigger */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="#booking" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-sans text-[10px] font-bold uppercase tracking-[2px] transition-all duration-300 bg-brand-dark text-white hover:bg-brand-gold hover:scale-105 active:scale-95 transform shadow-sm hover:shadow-md">
+            <a href="#booking" onClick={(e) => { e.preventDefault(); setIsBookingModalOpen(true); }} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-sans text-[10px] font-bold uppercase tracking-[2px] transition-all duration-300 bg-brand-dark text-white hover:bg-brand-gold hover:scale-105 active:scale-95 transform shadow-sm hover:shadow-md">
               Book Now
             </a>
           </div>
@@ -428,7 +443,7 @@ export default function App() {
               ))}
               <a
                 href="#booking"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); setIsBookingModalOpen(true); }}
                 className="mt-6 sm:mt-8 px-10 sm:px-12 py-3.5 sm:py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-transform active:scale-95"
                 style={{ animation: 'fadeIn 0.5s ease-out 0.35s both' }}
               >
@@ -530,7 +545,7 @@ export default function App() {
             className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
           >
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <a href="#booking" className="group relative w-[160px] sm:w-[184px] h-[52px] sm:h-[60px] flex items-center justify-center active:scale-95 hover:scale-105 transition-transform duration-300">
+              <a href="#booking" onClick={(e) => { e.preventDefault(); setIsBookingModalOpen(true); }} className="group relative w-[160px] sm:w-[184px] h-[52px] sm:h-[60px] flex items-center justify-center active:scale-95 hover:scale-105 transition-transform duration-300">
                 <svg viewBox="0 0 184 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 w-full h-full">
                   <path d="M0 0H184V45L164 65H0V0Z" fill="white"></path>
                 </svg>
@@ -634,7 +649,7 @@ export default function App() {
             <Reveal type="mask-reveal" className="w-full">
               <div className="relative aspect-[4/3] sm:aspect-[4/5] rounded-3xl overflow-hidden group cursor-pointer celebration-border hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl transition-all duration-500">
                 <ParallaxImage 
-                  src="https://moviebash.in/assets/uploads/screens/2560473c-65e1-439c-a609-93ba8001195f.JPG" 
+                  src="/gallery-6.jpg" 
                   alt="Plush Seating" 
                   className="w-full h-full"
                 />
@@ -904,8 +919,8 @@ export default function App() {
       </section>
 
       {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
-      <section ref={galleryRef} id="gallery" className="relative h-[180vh] sm:h-[220vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+      <section ref={galleryRef} id="gallery" className="relative h-[120vh] sm:h-[160vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
+        <div className="sticky top-[12vh] md:top-0 h-[76vh] md:h-screen flex items-center overflow-hidden">
           <div 
             style={{ transform: `translateX(${-scrollProgress * 82}%)` }} 
             className="flex gap-6 md:gap-12 px-4 sm:px-6 md:px-24 items-center transition-transform duration-100 ease-out will-change-transform"
@@ -941,7 +956,7 @@ export default function App() {
                     transform: `perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
                     transformStyle: 'preserve-3d'
                   }}
-                  className="relative h-[300px] w-[220px] sm:h-[500px] sm:w-[350px] md:h-[700px] md:w-[500px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform"
+                  className="relative h-[320px] w-[240px] sm:h-[400px] sm:w-[300px] md:h-[530px] md:w-[400px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform"
                 >
                   <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">
@@ -954,20 +969,52 @@ export default function App() {
         </div>
       </section>
 
-      {/* 7. Interactive Booking Wizard Section (High Contrast Light-Themed Card) */}
-      <section id="booking" className="py-12 sm:py-16 md:py-32 bg-mesh-gradient border-t border-black/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          
-          <div className="text-center mb-12">
+      {/* 7. Reservation Desk Invitation Section */}
+      <section id="booking" className="py-12 sm:py-16 md:py-24 bg-mesh-gradient border-t border-black/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <Reveal type="fade-up">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-[1px] bg-brand-gold"></div>
               <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[5px] font-bold">Reservation Desk</span>
               <div className="w-12 h-[1px] bg-brand-gold"></div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-bold">Reserve Your Slot</h2>
-          </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-bold mb-6">Ready to Book Your Experience?</h2>
+            <p className="text-brand-dark/70 font-sans text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8 font-medium">
+              Reserve your premium private theatre slot in Bengaluru. Select your suite, set the date and time, and customize with premium decorations & gourmet add-ons.
+            </p>
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
+              className="inline-flex items-center gap-3 px-10 py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 transform"
+            >
+              Open Booking Desk <Icons.Calendar size={14} />
+            </button>
+          </Reveal>
+        </div>
+      </section>
 
-          <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+      {/* Booking Form Modal Overlay */}
+      {isBookingModalOpen && (
+        <div className="fixed inset-0 z-[100] bg-brand-dark/95 backdrop-blur-md overflow-y-auto flex items-center justify-center p-3 sm:p-6 md:p-10 animate-fade-in">
+          <div className="relative bg-brand-bg w-full max-w-5xl rounded-2xl sm:rounded-3xl shadow-2xl border border-black/10 overflow-hidden flex flex-col my-4 sm:my-8">
+            
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-5 border-b border-black/5 bg-white">
+              <div className="flex items-center gap-3">
+                <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[3px] font-bold">Reservation Desk</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                <span className="text-xs font-bold text-brand-dark font-sans uppercase">Booking Wizard</span>
+              </div>
+              <button 
+                onClick={() => setIsBookingModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-brand-dark/60 hover:text-brand-dark hover:bg-black/10 transition-colors"
+              >
+                <Icons.X size={18} />
+              </button>
+            </div>
+            
+            {/* Modal Scrollable Body */}
+            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[80vh]">
+<div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative overflow-hidden">
             
             {!bookingFinished ? (
               <form onSubmit={handleFormSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8">
@@ -1179,10 +1226,10 @@ export default function App() {
             )}
 
           </div>
+            </div>
+          </div>
         </div>
-      </section>
-
-
+      )}
       {/* 9.5 Instagram Reels Showcase Section */}
       <section id="reels" className="py-12 sm:py-16 md:py-32 bg-mesh-gradient border-t border-black/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24">

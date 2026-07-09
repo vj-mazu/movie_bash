@@ -279,12 +279,6 @@
   }
 }
 
-/* Gallery mobile: keep sticky scroll animation, just disable 3D card tilts for performance */
-@media (max-width: 767px) {
-  #gallery .will-change-transform > div {
-    transform: none !important;
-  }
-}
 
 /* Premium Text Reveal Animation using clipping path */
 .hero-text-reveal {

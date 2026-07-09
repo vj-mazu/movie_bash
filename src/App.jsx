@@ -960,7 +960,7 @@ export default function App() {
                     transform: `perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
                     transformStyle: 'preserve-3d'
                   }}
-                  className="relative h-[320px] w-[240px] sm:h-[400px] sm:w-[300px] md:h-[530px] md:w-[400px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform"
+                  className="relative h-[320px] w-[240px] sm:h-[400px] sm:w-[300px] md:h-[530px] md:w-[400px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform cinematic-glass-border"
                 >
                   <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">

@@ -207,6 +207,7 @@ export default function App() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [activeReview, setActiveReview] = useState(1); // Default to index 1 so left and right are populated
 
   const toggleFaq = (idx) => {
     setActiveFaq(prev => prev === idx ? null : idx);
@@ -302,6 +303,14 @@ export default function App() {
     setSelectedScreen(screen);
     setBookingStep(1);
     setIsBookingModalOpen(true);
+  };
+
+  const handlePrevReview = () => {
+    setActiveReview((prev) => (prev === 0 ? 3 : prev - 1));
+  };
+
+  const handleNextReview = () => {
+    setActiveReview((prev) => (prev === 3 ? 0 : prev + 1));
   };
 
   const handleFormSubmit = (e) => {
@@ -1319,11 +1328,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* 10. Reviews Section */}
-      <section id="reviews" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-brand-bg border-t border-black/5">
+      {/* 10. Reviews Section (3D Coverflow Stage) */}
+      <section id="reviews" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-brand-bg border-t border-black/5 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-[1px] bg-brand-gold"></div>
               <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[5px] font-bold">Voice of our guests</span>
@@ -1342,37 +1351,126 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {REVIEWS.map((review, i) => (
-              <div key={i} className="relative flex flex-col p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white celebration-border hover:shadow-xl hover:-translate-y-2 hover:scale-[1.01] transition-all duration-500 group h-full transform">
-                <div className="flex items-center gap-3 mb-4">
-                  {/* Avatar badge matching Google layout */}
-                  <div className={`w-10 h-10 rounded-full ${review.bgColor} flex items-center justify-center text-white font-sans text-sm font-bold shadow-inner shrink-0`}>
-                    {review.initial}
-                  </div>
-                  <div className="overflow-hidden">
-                    <h4 className="text-brand-dark font-sans text-xs font-bold leading-tight truncate">{review.name}</h4>
-                    <span className="text-brand-dark/40 font-sans text-[8px] uppercase tracking-[1px] font-bold block truncate">{review.source}</span>
-                  </div>
-                </div>
+          {/* 3D Coverflow Stage container */}
+          <div className="relative h-[480px] sm:h-[420px] md:h-[400px] w-full max-w-4xl mx-auto flex items-center justify-center py-8">
+            <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: '1000px' }}>
+              {REVIEWS.map((review, idx) => {
+                const offset = idx - activeReview;
+                const absOffset = Math.abs(offset);
+                
+                // Coverflow coordinates
+                let transformStyle = '';
+                let opacityStyle = 1;
+                let zIndexVal = 10;
+                let pointerEvents = 'auto';
 
-                <div className="flex text-brand-gold gap-0.5 mb-3">
-                  {[...Array(review.rating)].map((_, idx) => <Icons.Star key={idx} size={11} fill="currentColor" className="text-brand-gold" />)}
-                </div>
-                
-                <p className="text-brand-dark/70 font-sans text-[11px] sm:text-xs leading-relaxed mb-6 flex-grow font-medium">"{review.text}"</p>
-                
-                <div className="flex items-center justify-between border-t border-black/5 pt-3 mt-auto text-[9px] font-bold text-brand-dark/30 uppercase tracking-[1px]">
-                  <span>Google Maps</span>
-                  <span>{review.timeAgo}</span>
-                </div>
-              </div>
-            ))}
+                if (offset === 0) {
+                  // Active card in center
+                  transformStyle = 'translateX(0) scale(1) translateZ(0) rotateY(0deg)';
+                  opacityStyle = 1;
+                  zIndexVal = 30;
+                } else if (offset === -1 || (offset === 3 && activeReview === 0)) {
+                  // Left card
+                  transformStyle = 'translateX(-35%) scale(0.85) translateZ(-100px) rotateY(35deg)';
+                  opacityStyle = 0.55;
+                  zIndexVal = 20;
+                } else if (offset === 1 || (offset === -3 && activeReview === 3)) {
+                  // Right card
+                  transformStyle = 'translateX(35%) scale(0.85) translateZ(-100px) rotateY(-35deg)';
+                  opacityStyle = 0.55;
+                  zIndexVal = 20;
+                } else {
+                  // Hidden cards
+                  transformStyle = `translateX(${offset * 60}%) scale(0.7) translateZ(-200px) opacity-0`;
+                  opacityStyle = 0;
+                  zIndexVal = 10;
+                  pointerEvents = 'none';
+                }
+
+                // Support click-to-activate directly on cards
+                const handleCardClick = () => {
+                  if (offset !== 0) {
+                    setActiveReview(idx);
+                  }
+                };
+
+                return (
+                  <div
+                    key={idx}
+                    onClick={handleCardClick}
+                    style={{
+                      transform: transformStyle,
+                      opacity: opacityStyle,
+                      zIndex: zIndexVal,
+                      pointerEvents: pointerEvents,
+                      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                      transformStyle: 'preserve-3d'
+                    }}
+                    className={`absolute w-[290px] sm:w-[350px] md:w-[450px] h-[340px] sm:h-[280px] md:h-[260px] rounded-3xl bg-white celebration-border p-6 sm:p-8 flex flex-col justify-between shadow-xl cursor-pointer select-none origin-center`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-full ${review.bgColor} flex items-center justify-center text-white font-sans text-sm font-bold shadow-inner`}>
+                            {review.initial}
+                          </div>
+                          <div>
+                            <h4 className="text-brand-dark font-sans text-xs font-bold leading-tight">{review.name}</h4>
+                            <span className="text-brand-dark/40 font-sans text-[8px] uppercase tracking-[1px] font-bold block">{review.source}</span>
+                          </div>
+                        </div>
+                        <div className="flex text-brand-gold gap-0.5">
+                          {[...Array(review.rating)].map((_, sIdx) => (
+                            <Icons.Star key={sIdx} size={11} fill="currentColor" className="text-brand-gold" />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <p className="text-brand-dark/80 font-sans text-xs leading-relaxed italic font-medium">
+                        "{review.text}"
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-black/5 pt-4 text-[9px] font-bold text-brand-dark/30 uppercase tracking-[1px]">
+                      <span>Google Maps Verified</span>
+                      <span>{review.timeAgo}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Coverflow controls */}
+          <div className="flex items-center justify-center gap-8 mt-6">
+            <button
+              onClick={handlePrevReview}
+              className="w-10 h-10 rounded-full border border-brand-gold/30 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-white transition-all active:scale-95 shadow-sm"
+            >
+              <Icons.ChevronLeft size={18} />
+            </button>
+            
+            {/* Dots */}
+            <div className="flex items-center gap-2.5">
+              {[...Array(4)].map((_, dIdx) => (
+                <button
+                  key={dIdx}
+                  onClick={() => setActiveReview(dIdx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeReview === dIdx ? 'w-6 bg-brand-gold' : 'w-2 bg-brand-gold/25'}`}
+                ></button>
+              ))}
+            </div>
+
+            <button
+              onClick={handleNextReview}
+              className="w-10 h-10 rounded-full border border-brand-gold/30 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-white transition-all active:scale-95 shadow-sm"
+            >
+              <Icons.ChevronRight size={18} />
+            </button>
           </div>
 
         </div>
       </section>
-
       {/* 10.5 Collapsible FAQ Accordion Section */}
       <section className="py-12 sm:py-16 md:py-32 bg-mesh-gradient relative overflow-hidden border-t border-black/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

@@ -434,38 +434,48 @@ export default function App() {
           </button>
         </div>
 
-        {mobileMenuOpen && (
-          <div 
-            className="lg:hidden fixed inset-0 bg-brand-dark/98 backdrop-blur-xl z-[60] flex flex-col justify-center items-center p-8"
-            style={{ animation: 'fadeIn 0.3s ease-out' }}
-          >
-            <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6 text-brand-gold hover:text-white transition-colors">
-              <Icons.X size={28} />
-            </button>
-            <div className="flex flex-col gap-6 sm:gap-8 text-center">
-              {['Suites', 'Services', 'Reels', 'Pricing', 'Gallery', 'Reviews'].map((link, idx) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-xl sm:text-2xl font-serif-italic italic tracking-widest text-white hover:text-brand-gold font-bold transition-all duration-300"
-                  style={{ animation: `fadeIn 0.4s ease-out ${idx * 0.05}s both` }}
-                >
-                  {link}
-                </a>
-              ))}
-              <a
-                href="#booking"
-                onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); setIsBookingModalOpen(true); }}
-                className="mt-6 sm:mt-8 px-10 sm:px-12 py-3.5 sm:py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-transform active:scale-95"
-                style={{ animation: 'fadeIn 0.5s ease-out 0.35s both' }}
-              >
-                Book Now
-              </a>
-            </div>
-          </div>
-        )}
       </nav>
+      
+      {/* Mobile menu overlay moved outside nav to prevent positioning containment */}
+      {mobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-brand-dark/98 backdrop-blur-xl z-[90] flex flex-col justify-center items-center p-8"
+          style={{ animation: 'fadeIn 0.3s ease-out' }}
+        >
+          {/* Logo in mobile menu header */}
+          <div className="absolute top-6 left-6 flex items-center gap-3">
+            <img src="/logo.png" alt="Movie Bash Logo" className="h-8 object-contain bg-white px-2 py-0.5 rounded-lg shadow-sm" />
+            <span className="text-brand-gold font-serif-italic font-bold tracking-tighter uppercase italic text-sm">
+              MOVIE BASH
+            </span>
+          </div>
+
+          <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6 text-brand-gold hover:text-white transition-colors">
+            <Icons.X size={28} />
+          </button>
+          <div className="flex flex-col gap-6 sm:gap-8 text-center">
+            {['Suites', 'Services', 'Reels', 'Pricing', 'Gallery', 'Reviews'].map((link, idx) => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl sm:text-2xl font-serif-italic italic tracking-widest text-white hover:text-brand-gold font-bold transition-all duration-300"
+                style={{ animation: `fadeIn 0.4s ease-out ${idx * 0.05}s both` }}
+              >
+                {link}
+              </a>
+            ))}
+            <a
+              href="#booking"
+              onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); setIsBookingModalOpen(true); }}
+              className="mt-6 sm:mt-8 px-10 sm:px-12 py-3.5 sm:py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-transform active:scale-95"
+              style={{ animation: 'fadeIn 0.5s ease-out 0.35s both' }}
+            >
+              Book Now
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* 3. Hero Section (Obsidian Dark Background with Scroll Animations) */}
       <section className="relative min-h-screen w-full bg-black overflow-hidden flex items-center justify-center">

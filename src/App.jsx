@@ -407,17 +407,21 @@ export default function App() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 bg-brand-dark/98 backdrop-blur-xl z-40 flex flex-col justify-center items-center p-8">
-            <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6 text-brand-gold hover:text-white">
+          <div 
+            className="lg:hidden fixed inset-0 bg-brand-dark/98 backdrop-blur-xl z-[60] flex flex-col justify-center items-center p-8"
+            style={{ animation: 'fadeIn 0.3s ease-out' }}
+          >
+            <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6 text-brand-gold hover:text-white transition-colors">
               <Icons.X size={28} />
             </button>
-            <div className="flex flex-col gap-8 text-center">
-              {['Suites', 'Services', 'Reels', 'Pricing', 'Reviews'].map((link) => (
+            <div className="flex flex-col gap-6 sm:gap-8 text-center">
+              {['Suites', 'Services', 'Reels', 'Pricing', 'Gallery', 'Reviews'].map((link, idx) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-serif-italic italic tracking-widest text-white hover:text-brand-gold font-bold transition-colors"
+                  className="text-xl sm:text-2xl font-serif-italic italic tracking-widest text-white hover:text-brand-gold font-bold transition-all duration-300"
+                  style={{ animation: `fadeIn 0.4s ease-out ${idx * 0.05}s both` }}
                 >
                   {link}
                 </a>
@@ -425,7 +429,8 @@ export default function App() {
               <a
                 href="#booking"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-8 px-12 py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-transform active:scale-95"
+                className="mt-6 sm:mt-8 px-10 sm:px-12 py-3.5 sm:py-4 bg-brand-gold hover:bg-[#b58c40] text-white font-sans text-xs font-bold uppercase tracking-[2px] rounded-full shadow-lg transition-transform active:scale-95"
+                style={{ animation: 'fadeIn 0.5s ease-out 0.35s both' }}
               >
                 Book Now
               </a>
@@ -444,11 +449,34 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-black/70 z-[1]"></div>
         <div className="absolute inset-0 z-[2] opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundRepeat: 'repeat' }}></div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center justify-start md:justify-center pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 min-h-[calc(100vh-80px)]">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 min-h-[calc(100vh-80px)]">
           
+          {/* Floating Trust Badge — unique top element */}
+          <div 
+            style={{ transitionDelay: '0.1s', transitionDuration: '1.2s' }}
+            className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''} mb-6 sm:mb-8`}
+          >
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 shadow-lg">
+              <div className="flex text-brand-gold gap-0.5">
+                {[...Array(5)].map((_, i) => <Icons.Star key={i} size={10} fill="currentColor" />)}
+              </div>
+              <span className="text-white/90 font-sans text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
+                4.9 Rated
+              </span>
+              <span className="w-[1px] h-3 bg-white/20"></span>
+              <span className="text-white/60 font-sans text-[9px] sm:text-[10px] font-medium uppercase tracking-wider">
+                500+ Celebrations
+              </span>
+              <span className="w-[1px] h-3 bg-white/20 hidden sm:block"></span>
+              <span className="text-brand-gold font-sans text-[9px] sm:text-[10px] font-bold uppercase tracking-wider hidden sm:block">
+                Bengaluru
+              </span>
+            </div>
+          </div>
+
           {/* Tag layout */}
           <div 
-            style={{ transitionDelay: '0.2s', transitionDuration: '1.2s' }}
+            style={{ transitionDelay: '0.3s', transitionDuration: '1.2s' }}
             className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
           >
             <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-6">
@@ -870,14 +898,14 @@ export default function App() {
       </section>
 
       {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
-      <section ref={galleryRef} id="gallery" className="relative h-[200vh] sm:h-[250vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
+      <section ref={galleryRef} id="gallery" className="relative h-[180vh] sm:h-[220vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
           <div 
-            style={{ transform: `translateX(${-scrollProgress * 65}%)` }} 
+            style={{ transform: `translateX(${-scrollProgress * 82}%)` }} 
             className="flex gap-6 md:gap-12 px-4 sm:px-6 md:px-24 items-center transition-transform duration-100 ease-out will-change-transform"
           >
             {/* Header Title Block */}
-            <div className="flex flex-col justify-center min-w-[280px] sm:min-w-[350px] md:min-w-[500px] pr-4 md:pr-8 shrink-0">
+            <div className="flex flex-col justify-center min-w-[200px] sm:min-w-[300px] md:min-w-[500px] pr-4 md:pr-8 shrink-0">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-[1px] bg-brand-gold"></div>
                 <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[6px] font-bold">Gallery</span>
@@ -936,12 +964,12 @@ export default function App() {
           <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative overflow-hidden">
             
             {!bookingFinished ? (
-              <form onSubmit={handleFormSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <form onSubmit={handleFormSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8">
                 
                 {/* Left Column: Details form */}
-                <div className="lg:col-span-7 space-y-6">
+                <div className="lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-6">
                   {/* Step 1: Name and Contact info */}
-                  <div className="bg-white/50 backdrop-blur-md rounded-2xl p-6 border border-white/60 space-y-4">
+                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-3 sm:space-y-4">
                     <span className="text-xs font-sans font-bold uppercase tracking-[2px] text-brand-gold block">1. Contact Information</span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1">
@@ -970,7 +998,7 @@ export default function App() {
                   </div>
 
                   {/* Step 2: Suite selection */}
-                  <div className="bg-white/50 backdrop-blur-md rounded-2xl p-6 border border-white/60 space-y-3">
+                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-3">
                     <span className="text-xs font-sans font-bold uppercase tracking-[2px] text-brand-gold block">2. Select Suite Room</span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {SCREENS.map(screen => (
@@ -987,7 +1015,7 @@ export default function App() {
                   </div>
 
                   {/* Step 3: Date, Time & Occasion */}
-                  <div className="bg-white/50 backdrop-blur-md rounded-2xl p-6 border border-white/60 space-y-4">
+                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-3 sm:space-y-4">
                     <span className="text-xs font-sans font-bold uppercase tracking-[2px] text-brand-gold block">3. Date & Occasion</span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div className="space-y-1">
@@ -1029,7 +1057,7 @@ export default function App() {
 
                     <div className="space-y-2 pt-2">
                       <label className="text-[10px] font-sans font-bold uppercase tracking-[1px] text-brand-dark/50">Select Time Slot</label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 sm:grid-cols-3 gap-1.5 sm:gap-2">
                         {TIME_SLOTS.map(slot => (
                           <div
                             key={slot.id}
@@ -1046,9 +1074,9 @@ export default function App() {
                 </div>
 
                 {/* Right Column: Addons and Total checkout summary */}
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-3 sm:space-y-4 md:space-y-6">
                   {/* Step 4: Addons list */}
-                  <div className="bg-white/50 backdrop-blur-md rounded-2xl p-6 border border-white/60 space-y-4">
+                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-3 sm:space-y-4">
                     <span className="text-xs font-sans font-bold uppercase tracking-[2px] text-brand-gold block">4. Add-ons (Optional)</span>
                     
                     <div className="space-y-4 max-h-[220px] overflow-y-auto pr-1">

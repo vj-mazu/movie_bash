@@ -396,7 +396,7 @@ export default function App() {
             <img 
               src="/logo.png" 
               alt="Movie Bash Logo" 
-              className="h-10 md:h-12 object-contain transition-all duration-500" 
+              className="h-14 md:h-16 object-contain transition-all duration-500" 
             />
             <div className="flex flex-col">
               <span className="text-xl sm:text-2xl font-serif-italic font-black tracking-tighter uppercase italic text-brand-gold transition-colors duration-500">
@@ -1523,7 +1523,7 @@ export default function App() {
           
           <div className="col-span-1 sm:col-span-2">
             <div className="flex items-center gap-4 mb-6">
-              <img src="/logo.png" alt="Movie Bash" className="h-12 object-contain" />
+              <img src="/logo.png" alt="Movie Bash" className="h-16 md:h-20 object-contain bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-md" />
               <h2 className="text-xl sm:text-2xl md:text-3xl font-serif-italic font-black tracking-tighter uppercase italic text-brand-gold leading-none">
                 MOVIE BASH <span className="text-white">BENGALURU</span>
               </h2>

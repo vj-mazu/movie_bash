@@ -274,3 +274,34 @@
     align-items: flex-start;
   }
 }
+
+/* Gallery mobile scroll behavior override (removes sticky scroll-hijacking below 768px) */
+@media (max-width: 767px) {
+  #gallery {
+    height: auto !important;
+  }
+  #gallery .sticky {
+    position: relative !important;
+    height: auto !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+  #gallery .will-change-transform {
+    transform: none !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  #gallery .will-change-transform::-webkit-scrollbar {
+    display: none;
+  }
+  #gallery .will-change-transform > div {
+    scroll-snap-align: center;
+    transform: none !important;
+  }
+}

@@ -344,24 +344,16 @@ export default function App() {
           </div>
           
           <div className="max-w-2xl relative z-10 loader-content">
-            <div className="mb-12 flex flex-col items-center">
-              <img src="/logo.png" alt="Movie Bash" className="h-20 mb-6 object-contain" />
-              <div className="flex flex-col items-center">
-                <span className="text-3xl md:text-4xl font-serif-italic text-brand-gold italic font-black tracking-tighter uppercase" style={{ letterSpacing: '-0.05em' }}>
-                  MOVIE BASH
-                </span>
-                <span className="text-[10px] font-sans text-brand-dark/50 tracking-[8px] uppercase mt-1 font-bold">
-                  BENGALURU
-                </span>
-              </div>
+            <div className="mb-8 flex flex-col items-center">
+              <img src="/logo.png" alt="Movie Bash" className="h-20 sm:h-24 object-contain" />
             </div>
 
-            <div className="mb-12 h-28">
-              <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mb-8"></div>
-              <h3 className="text-brand-dark font-serif-italic italic text-2xl md:text-3xl font-bold leading-tight px-4">
+            <div className="h-24">
+              <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mb-6"></div>
+              <h3 className="text-brand-dark font-serif-italic italic text-xl sm:text-2xl md:text-3xl font-bold leading-tight px-4">
                 "{loaderQuote}"
               </h3>
-              <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mt-8"></div>
+              <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mt-6"></div>
             </div>
           </div>
         </div>
@@ -452,16 +444,16 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-black/70 z-[1]"></div>
         <div className="absolute inset-0 z-[2] opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundRepeat: 'repeat' }}></div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center pt-24 pb-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12 min-h-[calc(100vh-80px)]">
           
           {/* Tag layout */}
           <div 
             style={{ transitionDelay: '0.2s', transitionDuration: '1.2s' }}
             className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
           >
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-6">
               <div className="w-8 h-[1px] bg-brand-gold"></div>
-              <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[5px] font-bold">
+              <span className="text-brand-gold font-sans text-[8px] sm:text-[10px] uppercase tracking-[3px] sm:tracking-[5px] font-bold">
                 Private Cinema & Celebrations
               </span>
               <div className="w-8 h-[1px] bg-brand-gold"></div>
@@ -469,7 +461,7 @@ export default function App() {
           </div>
 
           {/* Heading */}
-          <h1 className="hero-headline flex flex-col font-bold text-white uppercase text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] mb-6 sm:mb-8 leading-none">
+          <h1 className="hero-headline flex flex-col font-bold text-white uppercase text-[28px] sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] mb-4 sm:mb-6 md:mb-8 leading-none">
             <div 
               style={{ transitionDelay: '0.4s', transitionDuration: '1.2s' }}
               className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
@@ -480,7 +472,7 @@ export default function App() {
               style={{ transitionDelay: '0.6s', transitionDuration: '1.2s' }}
               className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
             >
-              <span className="text-brand-gold font-serif-italic italic font-light lowercase py-2 block">private</span>
+              <span className="text-brand-gold font-serif-italic italic font-light lowercase py-1 sm:py-2 block">private</span>
             </div>
             <div 
               style={{ transitionDelay: '0.8s', transitionDuration: '1.2s' }}
@@ -494,7 +486,7 @@ export default function App() {
             style={{ transitionDelay: '1.0s', transitionDuration: '1.2s' }}
             className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
           >
-            <p className="text-white/70 font-sans text-sm sm:text-base max-w-xl leading-relaxed mb-10 font-light">
+            <p className="text-white/70 font-sans text-xs sm:text-sm md:text-base max-w-xl leading-relaxed mb-6 sm:mb-8 md:mb-10 font-light">
               Host <span className="text-brand-gold font-semibold">immersive movie screenings</span>, <span className="text-brand-gold font-semibold">birthday surprise bashes</span>, <span className="text-brand-gold font-semibold">intimate anniversaries</span>, or <span className="text-brand-gold font-semibold">gaming nights</span> in Bengaluru's <span className="text-white font-semibold underline decoration-brand-gold/60 underline-offset-4">finest private theater slots</span>.
             </p>
           </div>
@@ -812,6 +804,122 @@ export default function App() {
         </div>
       </section>
 
+
+      {/* 8. Pricing Section (Grid layout matching Cine Central) */}
+      <section id="pricing" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-brand-bg relative overflow-hidden border-t border-black/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-gold/[0.05] blur-[150px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          
+          <div className="mb-16 text-center">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-[1px] bg-brand-gold"></div>
+              <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[5px] font-bold">Suite Pricing</span>
+              <div className="w-12 h-[1px] bg-brand-gold"></div>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif-italic text-brand-dark italic font-bold leading-none mb-6">Rates</h2>
+            <p className="text-brand-dark/70 font-sans text-xs uppercase tracking-[2px] max-w-md mx-auto leading-relaxed font-bold">
+              Transparent hourly rates. Cake decoration services and photography available as add-ons.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+            {SCREENS.map((screen) => (
+              <div
+                key={screen.id}
+                className={`relative flex flex-col p-6 sm:p-8 md:p-10 transition-all duration-500 bg-white rounded-2xl sm:rounded-3xl ${screen.id === 2 ? 'md:-translate-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-2 ring-brand-gold' : 'border border-black/10 shadow-sm hover:shadow-md'}`}
+              >
+                {screen.id === 2 && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-brand-gold text-white font-sans text-[9px] font-bold uppercase tracking-[2px] px-5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-brand-gold/30">
+                      <Icons.Star size={10} fill="currentColor" /> Premium Choice
+                    </span>
+                  </div>
+                )}
+                
+                <h3 className="text-brand-dark font-sans text-[10px] font-black uppercase tracking-[3px] mb-6">{screen.name}</h3>
+                
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-black">₹{screen.price}</span>
+                  <span className="text-brand-dark/40 font-sans text-[10px] uppercase tracking-[2px] font-bold">/ hour</span>
+                </div>
+                
+                <p className="text-brand-dark/70 font-sans text-xs leading-relaxed mb-8 mt-2 font-medium">{screen.desc}</p>
+                
+                <ul className="flex flex-col gap-3 mb-8 flex-grow">
+                  {screen.highlights.map((item, n) => (
+                    <li key={n} className="flex items-center gap-3 text-brand-dark font-sans text-xs font-bold">
+                      <div className={`p-1 rounded-full ${screen.id === 2 ? 'bg-brand-gold/10 text-brand-gold' : 'bg-black/5 text-brand-dark'}`}>
+                        <Icons.Check size={12} />
+                      </div>
+                      <span className="text-[11px]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  onClick={() => handleStartBooking(screen)}
+                  className={`text-center font-sans text-[9px] font-bold uppercase tracking-[3px] py-3.5 rounded-full transition-all duration-300 flex items-center justify-center gap-2 ${screen.id === 2 ? 'bg-brand-gold text-white hover:bg-[#b58c40] hover:scale-105 shadow-md' : 'bg-brand-dark text-white hover:bg-black hover:scale-105'}`}
+                >
+                  Book on WhatsApp <Icons.WhatsApp size={14} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
+      <section ref={galleryRef} id="gallery" className="relative h-[200vh] sm:h-[250vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+          <div 
+            style={{ transform: `translateX(${-scrollProgress * 65}%)` }} 
+            className="flex gap-6 md:gap-12 px-4 sm:px-6 md:px-24 items-center transition-transform duration-100 ease-out will-change-transform"
+          >
+            {/* Header Title Block */}
+            <div className="flex flex-col justify-center min-w-[280px] sm:min-w-[350px] md:min-w-[500px] pr-4 md:pr-8 shrink-0">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-[1px] bg-brand-gold"></div>
+                <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[6px] font-bold">Gallery</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl md:text-8xl lg:text-9xl font-serif-italic text-brand-dark leading-[0.85] uppercase italic font-bold">
+                Cinematic <br />
+                <span className="text-brand-gold">Moments</span>
+              </h2>
+              <p className="text-brand-dark/50 font-sans text-xs uppercase tracking-[3px] mt-6 max-w-xs hidden md:block font-bold">
+                Scroll down to swipe through real moments captured at Movie Bash
+              </p>
+            </div>
+
+            {/* Alternating 3D Flipper Image Cards */}
+            {GALLERY.map((item, idx) => {
+              // Calculate 3D scroll tilt based on card progress position relative to center viewport
+              const cardProgress = scrollProgress * 1.5;
+              const cardCenter = (idx * 0.35) - cardProgress;
+              const rotateY = Math.min(Math.max(cardCenter * 30, -20), 20);
+              const translateZ = Math.min(Math.max(-Math.abs(cardCenter) * 120, -100), 0);
+              const scale = 1 - Math.min(Math.max(Math.abs(cardCenter) * 0.08, 0), 0.08);
+
+              return (
+                <div 
+                  key={item.id} 
+                  style={{ 
+                    transform: `perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
+                    transformStyle: 'preserve-3d'
+                  }}
+                  className="relative h-[300px] w-[220px] sm:h-[500px] sm:w-[350px] md:h-[700px] md:w-[500px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform"
+                >
+                  <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">
+                    <span className="text-white font-serif-italic italic text-xl md:text-2xl font-bold">{item.title}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 7. Interactive Booking Wizard Section (High Contrast Light-Themed Card) */}
       <section id="booking" className="py-12 sm:py-16 md:py-32 bg-mesh-gradient border-t border-black/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -1040,120 +1148,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. Pricing Section (Grid layout matching Cine Central) */}
-      <section id="pricing" className="py-12 sm:py-16 md:py-32 px-4 sm:px-6 md:px-12 lg:px-24 bg-brand-bg relative overflow-hidden border-t border-black/5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-gold/[0.05] blur-[150px] pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          
-          <div className="mb-16 text-center">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-12 h-[1px] bg-brand-gold"></div>
-              <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[5px] font-bold">Suite Pricing</span>
-              <div className="w-12 h-[1px] bg-brand-gold"></div>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif-italic text-brand-dark italic font-bold leading-none mb-6">Rates</h2>
-            <p className="text-brand-dark/70 font-sans text-xs uppercase tracking-[2px] max-w-md mx-auto leading-relaxed font-bold">
-              Transparent hourly rates. Cake decoration services and photography available as add-ons.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            {SCREENS.map((screen) => (
-              <div
-                key={screen.id}
-                className={`relative flex flex-col p-6 sm:p-8 md:p-10 transition-all duration-500 bg-white rounded-2xl sm:rounded-3xl ${screen.id === 2 ? 'md:-translate-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-2 ring-brand-gold' : 'border border-black/10 shadow-sm hover:shadow-md'}`}
-              >
-                {screen.id === 2 && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="bg-brand-gold text-white font-sans text-[9px] font-bold uppercase tracking-[2px] px-5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-brand-gold/30">
-                      <Icons.Star size={10} fill="currentColor" /> Premium Choice
-                    </span>
-                  </div>
-                )}
-                
-                <h3 className="text-brand-dark font-sans text-[10px] font-black uppercase tracking-[3px] mb-6">{screen.name}</h3>
-                
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-black">₹{screen.price}</span>
-                  <span className="text-brand-dark/40 font-sans text-[10px] uppercase tracking-[2px] font-bold">/ hour</span>
-                </div>
-                
-                <p className="text-brand-dark/70 font-sans text-xs leading-relaxed mb-8 mt-2 font-medium">{screen.desc}</p>
-                
-                <ul className="flex flex-col gap-3 mb-8 flex-grow">
-                  {screen.highlights.map((item, n) => (
-                    <li key={n} className="flex items-center gap-3 text-brand-dark font-sans text-xs font-bold">
-                      <div className={`p-1 rounded-full ${screen.id === 2 ? 'bg-brand-gold/10 text-brand-gold' : 'bg-black/5 text-brand-dark'}`}>
-                        <Icons.Check size={12} />
-                      </div>
-                      <span className="text-[11px]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  onClick={() => handleStartBooking(screen)}
-                  className={`text-center font-sans text-[9px] font-bold uppercase tracking-[3px] py-3.5 rounded-full transition-all duration-300 flex items-center justify-center gap-2 ${screen.id === 2 ? 'bg-brand-gold text-white hover:bg-[#b58c40] hover:scale-105 shadow-md' : 'bg-brand-dark text-white hover:bg-black hover:scale-105'}`}
-                >
-                  Book on WhatsApp <Icons.WhatsApp size={14} />
-                </button>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
-      <section ref={galleryRef} id="gallery" className="relative h-[300vh] bg-brand-bg border-t border-black/5">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <div 
-            style={{ transform: `translateX(${-scrollProgress * 65}%)` }} 
-            className="flex gap-6 md:gap-12 px-4 sm:px-6 md:px-24 items-center transition-transform duration-100 ease-out will-change-transform"
-          >
-            {/* Header Title Block */}
-            <div className="flex flex-col justify-center min-w-[280px] sm:min-w-[350px] md:min-w-[500px] pr-4 md:pr-8 shrink-0">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-[1px] bg-brand-gold"></div>
-                <span className="text-brand-gold font-sans text-[10px] uppercase tracking-[6px] font-bold">Gallery</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-serif-italic text-brand-dark leading-[0.85] uppercase italic font-bold">
-                Cinematic <br />
-                <span className="text-brand-gold">Moments</span>
-              </h2>
-              <p className="text-brand-dark/50 font-sans text-xs uppercase tracking-[3px] mt-6 max-w-xs hidden md:block font-bold">
-                Scroll down to swipe through real moments captured at Movie Bash
-              </p>
-            </div>
-
-            {/* Alternating 3D Flipper Image Cards */}
-            {GALLERY.map((item, idx) => {
-              // Calculate 3D scroll tilt based on card progress position relative to center viewport
-              const cardProgress = scrollProgress * 1.5;
-              const cardCenter = (idx * 0.35) - cardProgress;
-              const rotateY = Math.min(Math.max(cardCenter * 30, -20), 20);
-              const translateZ = Math.min(Math.max(-Math.abs(cardCenter) * 120, -100), 0);
-              const scale = 1 - Math.min(Math.max(Math.abs(cardCenter) * 0.08, 0), 0.08);
-
-              return (
-                <div 
-                  key={item.id} 
-                  style={{ 
-                    transform: `perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
-                    transformStyle: 'preserve-3d'
-                  }}
-                  className="relative h-[400px] w-[280px] sm:h-[500px] sm:w-[350px] md:h-[700px] md:w-[500px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform"
-                >
-                  <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">
-                    <span className="text-white font-serif-italic italic text-xl md:text-2xl font-bold">{item.title}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* 9.5 Instagram Reels Showcase Section */}
       <section id="reels" className="py-12 sm:py-16 md:py-32 bg-mesh-gradient border-t border-black/5 overflow-hidden">

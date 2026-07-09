@@ -299,7 +299,7 @@
               inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease !important;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 .cinematic-glass-border:hover {
   border-color: rgba(255, 255, 255, 0.6);

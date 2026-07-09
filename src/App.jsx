@@ -766,12 +766,12 @@ export default function App() {
                   </Reveal>
 
                   {idx < SCREENS.length - 1 && (
-                    <div className="lg:col-span-2 w-full flex items-center justify-center py-6 select-none pointer-events-none mt-8">
-                      <div className="w-1/4 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent"></div>
-                      <div className="mx-4 text-[9px] font-sans tracking-[5px] uppercase text-brand-gold/70 font-bold flex items-center gap-2 whitespace-nowrap">
+                    <div className="lg:col-span-2 w-full flex items-center justify-center py-6 select-none pointer-events-none mt-8 px-2">
+                      <div className="flex-grow h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent"></div>
+                      <div className="mx-2 sm:mx-4 text-[7px] sm:text-[9px] font-sans tracking-[2px] sm:tracking-[5px] uppercase text-brand-gold/70 font-bold flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
                         ✦ {idx === 0 ? "4K Ultra-UHD Laser Quality" : "Immersive Surround Dolby Atmos Pro"} ✦
                       </div>
-                      <div className="w-1/4 h-[1px] bg-gradient-to-l from-transparent via-brand-gold/30 to-transparent"></div>
+                      <div className="flex-grow h-[1px] bg-gradient-to-l from-transparent via-brand-gold/30 to-transparent"></div>
                     </div>
                   )}
 
@@ -949,7 +949,7 @@ export default function App() {
               // Calculate 3D scroll tilt based on card progress position relative to center viewport
               const cardProgress = scrollProgress * 1.5;
               const cardCenter = (idx * 0.35) - cardProgress;
-              const rotateY = Math.min(Math.max(cardCenter * 30, -20), 20);
+              const rotateY = Math.min(Math.max(cardCenter * 35, -28), 28);
               const translateZ = Math.min(Math.max(-Math.abs(cardCenter) * 120, -100), 0);
               const scale = 1 - Math.min(Math.max(Math.abs(cardCenter) * 0.08, 0), 0.08);
 

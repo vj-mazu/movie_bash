@@ -476,7 +476,7 @@ export default function App() {
                 {[...Array(5)].map((_, i) => <Icons.Star key={i} size={10} fill="currentColor" />)}
               </div>
               <span className="text-white/90 font-sans text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
-                4.9 Rated
+                5.0 Rated
               </span>
               <span className="w-[1px] h-3 bg-white/20"></span>
               <span className="text-white/60 font-sans text-[9px] sm:text-[10px] font-medium uppercase tracking-wider">
@@ -919,7 +919,7 @@ export default function App() {
       </section>
 
       {/* 9. Cinematic Moments Gallery (Sticky Horizontal Scroll matching Cine Central) */}
-      <section ref={galleryRef} id="gallery" className="relative h-[120vh] sm:h-[160vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
+      <section ref={galleryRef} id="gallery" className="relative h-[240vh] sm:h-[260vh] md:h-[300vh] bg-brand-bg border-t border-black/5">
         <div className="sticky top-[12vh] md:top-0 h-[76vh] md:h-screen flex items-center overflow-hidden">
           <div 
             style={{ transform: `translateX(${-scrollProgress * 82}%)` }} 
@@ -1324,7 +1324,7 @@ export default function App() {
             <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif-italic text-brand-dark italic font-bold leading-none mb-6">Reviews</h2>
             
             <div className="flex items-center justify-center gap-4 mt-6">
-              <span className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-black">4.9</span>
+              <span className="text-3xl sm:text-4xl md:text-5xl font-serif-italic text-brand-dark italic font-black">5.0</span>
               <div className="flex flex-col items-start">
                 <div className="flex text-brand-gold">
                   {[...Array(5)].map((_, i) => <Icons.Star key={i} size={14} fill="currentColor" className="text-brand-gold" />)}

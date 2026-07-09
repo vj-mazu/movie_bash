@@ -1542,7 +1542,7 @@ export default function App() {
               Experience blockbusters, live matches, or milestone surprises in absolute privacy with 4K visuals and immersive Dolby Atmos surround sound. Bengaluru's signature private theater.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/moviebash.in" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-brand-gold transition-colors">
+              <a href="https://www.instagram.com/moviebash_privatetheatre?igsh=dHBiYjgwcXduNmo2" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-brand-gold transition-colors">
                 <Icons.Instagram />
               </a>
             </div>

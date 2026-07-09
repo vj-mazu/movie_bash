@@ -444,7 +444,7 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-black/70 z-[1]"></div>
         <div className="absolute inset-0 z-[2] opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundRepeat: 'repeat' }}></div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12 min-h-[calc(100vh-80px)]">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 text-center flex flex-col items-center justify-start md:justify-center pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 min-h-[calc(100vh-80px)]">
           
           {/* Tag layout */}
           <div 

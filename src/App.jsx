@@ -1501,10 +1501,7 @@ export function Reveal({ children, className = "", delay = 0, duration = 0.8, ty
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.01 }
     );

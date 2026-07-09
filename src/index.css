@@ -285,3 +285,14 @@
     transform: none !important;
   }
 }
+
+/* Premium Text Reveal Animation using clipping path */
+.hero-text-reveal {
+  clip-path: inset(0 0 0 0);
+  overflow: hidden;
+  display: block;
+}
+.hero-text-reveal > span {
+  display: block;
+  will-change: transform;
+}

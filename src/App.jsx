@@ -350,7 +350,7 @@ export default function App() {
 
             <div className="h-24">
               <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mb-6"></div>
-              <h3 className="text-brand-dark font-serif-italic italic text-xl sm:text-2xl md:text-3xl font-bold leading-tight px-4">
+              <h3 className="text-brand-dark text-center font-serif-italic italic text-xl sm:text-2xl md:text-3xl font-bold leading-tight px-4">
                 "{loaderQuote}"
               </h3>
               <div className="w-12 h-[1px] bg-brand-gold/50 mx-auto mt-6"></div>
@@ -491,22 +491,28 @@ export default function App() {
           {/* Heading */}
           <h1 className="hero-headline flex flex-col font-bold text-white uppercase text-[28px] sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] mb-4 sm:mb-6 md:mb-8 leading-none">
             <div 
-              style={{ transitionDelay: '0.4s', transitionDuration: '1.2s' }}
-              className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
+              className="hero-text-reveal"
+              style={{ transitionDelay: '0.4s' }}
             >
-              <span>PREMIUM</span>
+              <span className={`transition-transform duration-[1.4s] cubic-bezier(0.16,1,0.3,1) ${triggerHeroAnim ? 'translate-y-0' : 'translate-y-full'} block`}>
+                PREMIUM
+              </span>
             </div>
             <div 
-              style={{ transitionDelay: '0.6s', transitionDuration: '1.2s' }}
-              className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
+              className="hero-text-reveal"
+              style={{ transitionDelay: '0.6s' }}
             >
-              <span className="text-brand-gold font-serif-italic italic font-light lowercase py-1 sm:py-2 block">private</span>
+              <span className={`text-brand-gold font-serif-italic italic font-light lowercase py-1 sm:py-2 block transition-transform duration-[1.4s] cubic-bezier(0.16,1,0.3,1) ${triggerHeroAnim ? 'translate-y-0' : 'translate-y-full'}`}>
+                private
+              </span>
             </div>
             <div 
-              style={{ transitionDelay: '0.8s', transitionDuration: '1.2s' }}
-              className={`reveal-element reveal-fade-up ${triggerHeroAnim ? 'active' : ''}`}
+              className="hero-text-reveal"
+              style={{ transitionDelay: '0.8s' }}
             >
-              <span>EXPERIENCE</span>
+              <span className={`transition-transform duration-[1.4s] cubic-bezier(0.16,1,0.3,1) ${triggerHeroAnim ? 'translate-y-0' : 'translate-y-full'} block`}>
+                EXPERIENCE
+              </span>
             </div>
           </h1>
 

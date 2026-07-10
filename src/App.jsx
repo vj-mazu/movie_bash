@@ -208,6 +208,7 @@ export default function App() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [activeReview, setActiveReview] = useState(1); // Default to index 1 so left and right are populated
+  const [lightboxImage, setLightboxImage] = useState(null); // { src, title } object for unified lightbox zoom
 
   const toggleFaq = (idx) => {
     setActiveFaq(prev => prev === idx ? null : idx);
@@ -222,6 +223,24 @@ export default function App() {
   });
   const [selectedSlot, setSelectedSlot] = useState(TIME_SLOTS[2]);
   
+  const handlePrevLightbox = () => {
+    if (!lightboxImage) return;
+    const idx = GALLERY.findIndex(item => item.image === lightboxImage.src);
+    if (idx !== -1) {
+      const prevIdx = idx === 0 ? GALLERY.length - 1 : idx - 1;
+      setLightboxImage({ src: GALLERY[prevIdx].image, title: GALLERY[prevIdx].title });
+    }
+  };
+
+  const handleNextLightbox = () => {
+    if (!lightboxImage) return;
+    const idx = GALLERY.findIndex(item => item.image === lightboxImage.src);
+    if (idx !== -1) {
+      const nextIdx = idx === GALLERY.length - 1 ? 0 : idx + 1;
+      setLightboxImage({ src: GALLERY[nextIdx].image, title: GALLERY[nextIdx].title });
+    }
+  };
+
   const [customerDetails, setCustomerDetails] = useState({
     name: '',
     email: '',
@@ -737,7 +756,7 @@ export default function App() {
                   {/* Photo container */}
                   <div className={`w-full ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                     <Reveal type="mask-reveal" className="w-full">
-                      <div className="relative overflow-hidden rounded-3xl cursor-pointer group celebration-border hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl transition-all duration-500" onClick={() => handleStartBooking(suite)}>
+                      <div className="relative overflow-hidden rounded-3xl cursor-pointer group celebration-border hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl transition-all duration-500" onClick={() => setLightboxImage({ src: suite.image, title: suite.name })}>
                         <ParallaxImage 
                            src={suite.image} 
                            alt={suite.name} 
@@ -778,7 +797,7 @@ export default function App() {
                     </ul>
 
                     <div className="flex gap-4">
-                      <button onClick={() => handleStartBooking(suite)} className="px-8 py-3 bg-brand-dark hover:bg-brand-gold text-white font-sans text-[10px] font-bold uppercase tracking-[2px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 transform shadow-md hover:shadow-lg">
+                      <button onClick={() => setLightboxImage({ src: suite.image, title: suite.name })} className="px-8 py-3 bg-brand-dark hover:bg-brand-gold text-white font-sans text-[10px] font-bold uppercase tracking-[2px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 transform shadow-md hover:shadow-lg">
                         Select Suite
                       </button>
                     </div>
@@ -979,7 +998,8 @@ export default function App() {
                     transform: `perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
                     transformStyle: 'preserve-3d'
                   }}
-                  className="relative h-[320px] w-[240px] sm:h-[400px] sm:w-[300px] md:h-[530px] md:w-[400px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform cinematic-glass-border"
+                  onClick={() => setLightboxImage({ src: item.image, title: item.title })}
+                  className="relative h-[320px] w-[240px] sm:h-[400px] sm:w-[300px] md:h-[530px] md:w-[400px] overflow-hidden rounded-2xl md:rounded-3xl bg-neutral-900 shrink-0 group shadow-2xl transition-all duration-300 ease-out origin-center will-change-transform cinematic-glass-border cursor-zoom-in"
                 >
                   <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">
@@ -1078,17 +1098,33 @@ export default function App() {
                   </div>
 
                   {/* Step 2: Suite selection */}
-                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-3">
+                  <div className="bg-white/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/60 space-y-4">
                     <span className="text-xs font-sans font-bold uppercase tracking-[2px] text-brand-gold block">2. Select Suite Room</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    
+                    {/* Selected Suite Image Preview */}
+                    <div className="w-full h-32 sm:h-40 rounded-xl overflow-hidden relative shadow-inner">
+                      <img 
+                        src={selectedScreen.image} 
+                        alt={selectedScreen.name} 
+                        className="w-full h-full object-cover transition-all duration-500 animate-fade-in" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent flex items-end p-3">
+                        <div>
+                          <span className="text-[9px] font-sans font-bold uppercase text-brand-gold tracking-widest">{selectedScreen.tag}</span>
+                          <h4 className="text-white font-serif-italic italic text-sm sm:text-base font-bold leading-tight">{selectedScreen.name}</h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
                       {SCREENS.map(screen => (
                         <div
                           key={screen.id}
                           onClick={() => setSelectedScreen(screen)}
-                          className={`p-3 rounded-xl border cursor-pointer transition-all text-center ${selectedScreen.id === screen.id ? 'border-brand-gold bg-brand-gold/5 text-brand-dark' : 'border-black/5 hover:border-black/20 text-brand-dark'}`}
+                          className={`p-2.5 rounded-xl border cursor-pointer transition-all text-center flex flex-col justify-center ${selectedScreen.id === screen.id ? 'border-brand-gold bg-brand-gold/5 text-brand-dark shadow-sm scale-[1.02]' : 'border-black/5 hover:border-black/20 text-brand-dark'}`}
                         >
-                          <span className="block font-sans text-xs font-bold uppercase">{screen.name}</span>
-                          <span className="block font-sans text-[10px] text-brand-gold font-bold mt-1">Starts @ ₹{screen.price}</span>
+                          <span className="block font-sans text-[10px] font-bold uppercase truncate">{screen.name.split(' ')[0]}</span>
+                          <span className="block font-sans text-[8px] text-brand-gold font-bold mt-0.5">₹{screen.price}</span>
                         </div>
                       ))}
                     </div>
@@ -1651,7 +1687,61 @@ export default function App() {
           </div>
         </div>
       )}
+      {/* 13. Cinematic Moments Lightbox Modal */}
+      {lightboxImage !== null && (() => {
+        const isGallery = GALLERY.some(item => item.image === lightboxImage.src);
+        const galleryIdx = GALLERY.findIndex(item => item.image === lightboxImage.src);
+        
+        return (
+          <div 
+            className="fixed inset-0 z-[120] bg-black/95 flex flex-col items-center justify-center p-4 animate-fade-in select-none"
+            onClick={() => setLightboxImage(null)}
+          >
+            {/* Close button */}
+            <button 
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-[130]"
+            >
+              <Icons.X size={20} />
+            </button>
 
+            {/* Image */}
+            <div className="relative max-w-4xl max-h-[75vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+              <img 
+                src={lightboxImage.src} 
+                alt={lightboxImage.title} 
+                className="max-w-full max-h-[75vh] object-contain rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl animate-scale-up" 
+              />
+              
+              {/* Title / Caption */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/75 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/10 text-white text-[10px] sm:text-xs font-serif-italic italic font-bold whitespace-nowrap shadow-lg">
+                {lightboxImage.title}
+              </div>
+            </div>
+
+            {/* Navigation Controls (Only shown for Cinematic Gallery sliding track) */}
+            {isGallery && galleryIdx !== -1 && (
+              <div className="flex items-center gap-6 mt-8" onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={handlePrevLightbox}
+                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all active:scale-90"
+                >
+                  <Icons.ChevronLeft size={24} />
+                </button>
+                <span className="text-white/60 font-sans text-xs font-bold min-w-[50px] text-center">
+                  {galleryIdx + 1} / {GALLERY.length}
+                </span>
+                <button
+                  onClick={handleNextLightbox}
+                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all active:scale-90"
+                >
+                  <Icons.ChevronRight size={24} />
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      })()}
     </div>
   );
 }

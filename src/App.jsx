@@ -797,7 +797,7 @@ export default function App() {
                     </ul>
 
                     <div className="flex gap-4">
-                      <button onClick={() => setLightboxImage({ src: suite.image, title: suite.name })} className="px-8 py-3 bg-brand-dark hover:bg-brand-gold text-white font-sans text-[10px] font-bold uppercase tracking-[2px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 transform shadow-md hover:shadow-lg">
+                      <button onClick={() => handleStartBooking(suite)} className="px-8 py-3 bg-brand-dark hover:bg-brand-gold text-white font-sans text-[10px] font-bold uppercase tracking-[2px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 transform shadow-md hover:shadow-lg">
                         Select Suite
                       </button>
                     </div>
